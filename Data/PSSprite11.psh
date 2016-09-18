@@ -1,0 +1,27 @@
+//=============================================================
+// Buffer
+//=============================================================
+
+// Texture
+texture2D g_tex;
+
+// Sampler
+SamplerState g_samp {
+	Filter = MIN_MAG_MIP_LINEAR;
+	AddressU = wrap;
+	AddressV = wrap;
+};
+
+cbuffer PS_Constant {
+	// Color
+	float4 g_color = {1,1,1,1};
+};
+
+//=============================================================
+// Function
+//=============================================================
+
+// PixelShader
+float4 main(float4 pos : SV_Position, float2 uv : TEXCOORD) : SV_TARGET {
+	return g_tex.Sample(g_samp, uv) * g_color;
+}
